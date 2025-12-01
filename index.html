@@ -28,11 +28,17 @@
       text-align: center;
       margin-bottom: 30px;
       width: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-out 0.2s forwards;
     }
     
     .faq-header-content {
       max-width: 800px;
       margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-out 0.4s forwards;
     }
     
     .faq-title {
@@ -53,6 +59,9 @@
       position: relative;
       max-width: 500px;
       margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-out 0.6s forwards;
     }
     
     .faq-search-input {
@@ -85,6 +94,9 @@
     .faq-section {
       max-width: 1400px;
       margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-out 0.8s forwards;
     }
     
     .faq-content-wrapper {
@@ -101,6 +113,9 @@
       border-radius: 2px;
       border: 1px solid #e0e0e0;
       padding: 25px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-out 1s forwards;
     }
     
     /* === FAQ Items === */
@@ -108,6 +123,8 @@
       border-bottom: 1px solid #eaeaea;
       overflow: hidden;
       transition: all 0.2s ease;
+      opacity: 0;
+      transform: translateY(15px);
     }
     
     .faq-item:last-child {
@@ -181,6 +198,9 @@
       padding: 25px;
       height: fit-content;
       border: 1px solid #ddd;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-out 1.2s forwards;
     }
     
     .support-card h3 {
@@ -234,22 +254,35 @@
       cursor: pointer;
       width: 100%;
       text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: slideUp 0.8s ease-out 1.4s forwards;
     }
     
     .btn-secondary:hover {
       background-color: #d3d3d3;
       color: #333;
+      transform: translateY(-2px);
     }
     
     /* === Animations === */
     @keyframes slideUp {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(20px);
       }
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
       }
     }
     
@@ -485,6 +518,18 @@
     const faqItems = document.querySelectorAll('.faq-item');
     const noResult = document.getElementById('faqNoResult');
     
+    // Function to animate FAQ items sequentially
+    function animateFAQItems() {
+      faqItems.forEach((item, index) => {
+        item.style.animation = `slideUp 0.6s ease-out ${0.1 * (index + 1)}s forwards`;
+      });
+    }
+    
+    // Initialize animations when page loads
+    window.addEventListener('load', () => {
+      animateFAQItems();
+    });
+    
     // Accordion functionality
     faqItems.forEach(item => {
       item.addEventListener('click', () => {
@@ -505,10 +550,18 @@
         const isMatch = question.includes(filter) || answer.includes(filter);
         
         item.style.display = isMatch ? 'block' : 'none';
-        if (isMatch) visibleCount++;
+        if (isMatch) {
+          item.style.animation = 'fadeIn 0.3s ease-out forwards';
+          visibleCount++;
+        } else {
+          item.style.animation = 'none';
+        }
       });
       
       noResult.style.display = visibleCount === 0 ? 'block' : 'none';
+      if (visibleCount === 0) {
+        noResult.style.animation = 'fadeIn 0.3s ease-out forwards';
+      }
     });
     
     // Open first FAQ item by default
