@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ Section - B2B Support</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.5;
+    }
+    
+    /* === Full Width Header (No Container) === */
+    .faq-header {
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.65) 100%), url("/call.jpg") center/cover;
+      padding: 80px 20px;
+      text-align: center;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+    
+    .faq-header-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .faq-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+    
+    .faq-subtitle {
+      font-size: 1.1rem;
+      color: #f0f0f0;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    
+    .faq-search-wrapper {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .faq-search-input {
+      width: 100%;
+      padding: 14px 45px 14px 20px;
+      border-radius: 2px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    
+    .faq-search-input:focus {
+      border-color: #0071e3;
+      box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
+    }
+    
+    .faq-search-icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    
+    /* === Main Content Layout === */
+    .faq-section {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .faq-content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 30px;
+      margin: 0 auto 40px;
+      padding: 0 20px;
+    }
+    
+    /* === FAQ Container === */
+    .faq-container {
+      background: #fff;
+      border-radius: 2px;
+      border: 1px solid #e0e0e0;
+      padding: 25px;
+    }
+    
+    /* === FAQ Items === */
+    .faq-item {
+      border-bottom: 1px solid #eaeaea;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    
+    .faq-question {
+      padding: 18px 0;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      transition: background-color 0.2s ease;
+    }
+    
+    .faq-question:hover {
+      background-color: #f9f9f9;
+    }
+    
+    .faq-toggle {
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: #0071e3;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 15px;
+      min-width: 20px;
+      text-align: center;
+    }
+    
+    .faq-item.active .faq-toggle {
+      transform: rotate(45deg);
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding-bottom: 18px;
+    }
+    
+    .faq-answer-text {
+      color: #555;
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+    
+    .faq-no-result {
+      display: none;
+      text-align: center;
+      padding: 30px 20px;
+      color: #777;
+      font-size: 1rem;
+    }
+    
+    /* === Support Card === */
+    .support-card {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                  url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      border-radius: 2px;
+      padding: 25px;
+      height: fit-content;
+      border: 1px solid #ddd;
+    }
+    
+    .support-card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .support-card p {
+      color: #f0f0f0;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    .contact-info {
+      font-size: 0.85rem;
+      margin: 16px 0 22px;
+    }
+    
+    .contact-info div {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .contact-info i {
+      margin-right: 8px;
+      width: 16px;
+    }
+    
+    /* === Support Button === */
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background-color: #e0e0e0;
+      color: #555;
+      text-decoration: none;
+      padding: 11px 20px;
+      border-radius: 2px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #d3d3d3;
+      color: #333;
+    }
+    
+    /* === Animations === */
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* === Responsive Design === */
+    @media (max-width: 992px) {
+      .faq-header {
+        padding: 60px 20px;
+      }
+      
+      .faq-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 15px;
+      }
+      
+      .support-card {
+        margin-top: 10px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .faq-header {
+        padding: 50px 15px;
+      }
+      
+      .faq-title {
+        font-size: 2rem;
+      }
+      
+      .faq-subtitle {
+        font-size: 1rem;
+      }
+      
+      .faq-search-input {
+        padding: 12px 40px 12px 16px;
+        font-size: 0.95rem;
+      }
+      
+      .faq-content-wrapper {
+        gap: 15px;
+        padding: 0 15px;
+      }
+      
+      .faq-container, .support-card {
+        padding: 20px;
+      }
+      
+      .faq-question {
+        padding: 16px 0;
+        font-size: 0.9rem;
+      }
+      
+      .btn-secondary {
+        padding: 10px 18px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .faq-header {
+        padding: 40px 10px;
+      }
+      
+      .faq-title {
+        font-size: 1.7rem;
+      }
+      
+      .faq-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+      }
+      
+      .faq-search-input {
+        padding: 11px 40px 11px 15px;
+        font-size: 0.9rem;
+      }
+      
+      .faq-content-wrapper {
+        padding: 0 10px;
+      }
+      
+      .faq-container, .support-card {
+        padding: 18px;
+      }
+      
+      .support-card h3 {
+        font-size: 1.2rem;
+      }
+      
+      .faq-question {
+        padding: 15px 0;
+        font-size: 0.9rem;
+      }
+      
+      .btn-secondary {
+        padding: 9px 16px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Full Width Header (No Container) -->
+  <div class="faq-header">
+    <div class="faq-header-content">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+      <p class="faq-subtitle">Find quick answers to your common queries about our products and services.</p>
+      
+      <!-- Search Bar -->
+      <div class="faq-search-wrapper">
+        <input
+          type="text"
+          id="faqSearch"
+          class="faq-search-input"
+          placeholder="Search your question..."
+          aria-label="Search FAQ"
+        />
+        <svg class="faq-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Main Content with FAQ and Support Sidebar -->
+  <section class="faq-section">
+    <div class="faq-content-wrapper">
+      <!-- FAQ Items -->
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What is the delivery time for my order?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-text">Our standard delivery time is 2–5 business days depending on your location. For urgent requirements, expedited shipping options are available.</div>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Do you provide bulk order discounts?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-text">Yes, we offer significant discounts for bulk orders. The discount percentage increases with order quantity. Please contact our sales team for a customized quote.</div>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Is GST included in product prices?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-text">Yes, all listed prices include GST unless mentioned otherwise. Tax invoices will be provided with every purchase.</div>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What payment methods do you accept?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-text">We accept secure online payments via credit/debit cards, UPI, bank transfers, and corporate PO systems for registered businesses.</div>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How can I track my order?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-text">Once your order is shipped, you will receive a tracking link via email and SMS. You can also track your order from your account dashboard.</div>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Do you offer technical support?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-text">Yes, we provide comprehensive technical support for all our products. Our support team is available Monday to Saturday, 9 AM to 6 PM.</div>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What is your return policy?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-text">We accept returns within 7 days of delivery for defective or damaged products. Please refer to our Returns & Refunds policy for complete details.</div>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Do you offer international shipping?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-text">Yes, we offer international shipping to select countries. Shipping costs and delivery times vary by destination. Contact our sales team for specific details.</div>
+          </div>
+        </div>
+        
+        <div id="faqNoResult" class="faq-no-result">
+          No matching results found. Try a different search term.
+        </div>
+      </div>
+      
+      <!-- Support Card -->
+      <div class="support-card">
+        <h3><i class="fas fa-headset"></i> Need Help?</h3>
+        <p>Didn’t find the answer you were looking for? Contact us and our team will get back to you shortly.</p>
+        <div class="contact-info">
+          <div><i class="fas fa-envelope"></i> sales@amarradio.com</div>
+          <div><i class="fas fa-phone"></i> +91-XXXXXXXXXX</div>
+          <div><i class="fas fa-clock"></i> Mon-Sat: 9 AM - 6 PM</div>
+        </div>
+        <a href="mailto:sales@amarradio.com" class="btn-secondary">
+          <i class="fas fa-comment-dots"></i> Contact Support
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Get elements
+    const searchInput = document.getElementById('faqSearch');
+    const faqItems = document.querySelectorAll('.faq-item');
+    const noResult = document.getElementById('faqNoResult');
+    
+    // Accordion functionality
+    faqItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        faqItems.forEach(i => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+      });
+    });
+    
+    // Search functionality
+    searchInput.addEventListener('keyup', () => {
+      const filter = searchInput.value.toLowerCase().trim();
+      let visibleCount = 0;
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question span:first-child').textContent.toLowerCase();
+        const answer = item.querySelector('.faq-answer-text').textContent.toLowerCase();
+        const isMatch = question.includes(filter) || answer.includes(filter);
+        
+        item.style.display = isMatch ? 'block' : 'none';
+        if (isMatch) visibleCount++;
+      });
+      
+      noResult.style.display = visibleCount === 0 ? 'block' : 'none';
+    });
+    
+    // Open first FAQ item by default
+    if (faqItems.length > 0) {
+      faqItems[0].classList.add('active');
+    }
+  </script>
+</body>
+</html>
